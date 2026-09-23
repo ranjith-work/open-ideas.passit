@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>PassIt settings</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body class="options">
+    <h1>PassIt</h1>
+
+    <form id="form">
+      <label class="field">
+        <span class="label">Receiver page</span>
+        <input id="receiver" type="url" required spellcheck="false" placeholder="https://passit.example.com/" />
+        <span class="help">
+          Where your copy of the PassIt page lives. It is four static files —
+          host them anywhere, or run <code>npm start</code> and use the LAN
+          address it prints so your phone can reach it. The handoff itself
+          travels in the part of the link after <code>#</code>, which browsers
+          never send to a server.
+        </span>
+      </label>
+
+      <label class="field">
+        <span class="label">This device is called</span>
+        <input id="device-name" type="text" maxlength="24" placeholder="e.g. Work laptop" />
+        <span class="help">Shown on the receiving device as “from …”. Optional.</span>
+      </label>
+
+      <div class="actions">
+        <button class="button" type="submit">Save</button>
+        <span id="saved" class="saved" hidden>Saved</span>
+      </div>
+    </form>
+
+    <script type="module" src="options.js"></script>
+  </body>
+</html>

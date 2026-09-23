@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="referrer" content="no-referrer" />
+    <title>PassIt</title>
+    <meta name="description" content="AirDrop for browser state. Scan a QR, continue reading on another device." />
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="icon" href="./icon.svg" />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <header class="topbar">
+      <a class="brand" href="./" aria-label="PassIt home">
+        <svg class="brand-mark" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3z" />
+          <path class="brand-dot" d="M14 14h3v3h-3zM18 18h3v3h-3z" />
+        </svg>
+        <span>PassIt</span>
+      </a>
+      <p class="tagline">AirDrop for browser state</p>
+    </header>
+
+    <main id="main">
+      <!-- Populated by app.js: one of the templates below. -->
+      <div id="view" class="view" aria-live="polite"></div>
+    </main>
+
+    <footer class="footer">
+      <p>
+        Handoffs live entirely inside the link. Nothing is uploaded — the part
+        after the <code>#</code> never leaves your devices.
+      </p>
+    </footer>
+
+    <!-- ── Templates ─────────────────────────────────────────────────────── -->
+
+    <template id="tpl-handoff">
+      <section class="card handoff">
+        <div class="site">
+          <img class="favicon" alt="" width="20" height="20" hidden />
+          <span class="site-letter" aria-hidden="true"></span>
+          <span class="host"></span>
+        </div>
+
+        <h1 class="title"></h1>
+        <p class="url"></p>
+
+        <ul class="chips" role="list"></ul>
+
+        <blockquote class="selection" hidden></blockquote>
+        <p class="note" hidden></p>
+
+        <a class="button primary open" href="#" rel="noopener">
+          <span>Open on this device</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true" class="icon">
+            <path d="M5 12h13M12 5l7 7-7 7" />
+          </svg>
+        </a>
+
+        <label class="switch">
+          <input type="checkbox" class="restore" checked />
+          <span>Restore my place on the page</span>
+        </label>
+
+        <div class="actions">
+          <button class="button ghost pass-on" type="button">Pass it on…</button>
+          <button class="button ghost copy" type="button">Copy link</button>
+        </div>
+
+        <div class="qr-panel" hidden>
+          <p class="qr-caption">Scan from the next device</p>
+          <div class="qr-holder"></div>
+          <p class="qr-meta"></p>
+        </div>
+      </section>
+    </template>
+
+    <template id="tpl-home">
+      <section class="card home">
+        <h1>Move the tab, not the link.</h1>
+        <p class="lede">
+          PassIt hands the page you are looking at — URL, your place in it, and
+          anything you had selected — to whichever device scans the code.
+        </p>
+
+        <div class="steps">
+          <div class="step"><b>1</b><span>Press the PassIt button on the tab you are showing.</span></div>
+          <div class="step"><b>2</b><span>Scan the code with any phone camera.</span></div>
+          <div class="step"><b>3</b><span>The page opens exactly where you left it.</span></div>
+        </div>
+
+        <div class="actions">
+          <button class="button primary scan" type="button">Scan a code</button>
+          <button class="button ghost paste" type="button">Paste a link</button>
+        </div>
+
+        <details class="install">
+          <summary>Set up the sending side</summary>
+          <div class="install-body">
+            <h3>Browser extension</h3>
+            <p>
+              Load <code>dist/extension</code> as an unpacked extension
+              (<code>chrome://extensions</code> → Developer mode → Load
+              unpacked). Then press <kbd>⌥⇧P</kbd> on any tab.
+            </p>
+            <h3>Bookmarklet</h3>
+            <p>
+              No install, works in Safari: drag this to your bookmarks bar, then
+              click it on any page.
+            </p>
+            <p><a class="button ghost bookmarklet" href="#">Pass it</a></p>
+            <p class="hint">
+              Dragging a link into the bookmarks bar is the only way to install
+              it — clicking it here just opens this page.
+            </p>
+          </div>
+        </details>
+      </section>
+    </template>
+
+    <template id="tpl-scan">
+      <section class="card scan-view">
+        <h1>Point at the code</h1>
+        <div class="camera">
+          <video playsinline muted></video>
+          <div class="reticle" aria-hidden="true"></div>
+        </div>
+        <p class="scan-status">Starting camera…</p>
+        <div class="actions">
+          <button class="button ghost cancel" type="button">Cancel</button>
+        </div>
+      </section>
+    </template>
+
+    <template id="tpl-error">
+      <section class="card error">
+        <h1>That code isn't a handoff</h1>
+        <p class="reason"></p>
+        <div class="actions">
+          <a class="button primary" href="./">Start over</a>
+        </div>
+      </section>
+    </template>
+
+    <script type="module" src="./app.js"></script>
+    <noscript>
+      <p class="noscript">PassIt decodes the handoff in your browser, so it needs JavaScript.</p>
+    </noscript>
+  </body>
+</html>

@@ -1,0 +1,34 @@
+{
+  "manifest_version": 3,
+  "name": "PassIt",
+  "version": "0.1.0",
+  "description": "Hand the tab you are looking at — URL, scroll position and selection — to any device that scans the code.",
+  "minimum_chrome_version": "109",
+  "action": {
+    "default_title": "Pass this tab (⌥⇧P)",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png",
+      "48": "icons/icon-48.png",
+      "128": "icons/icon-128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": false
+  },
+  "commands": {
+    "_execute_action": {
+      "suggested_key": { "default": "Alt+Shift+P", "mac": "Alt+Shift+P" },
+      "description": "Show the PassIt code for this tab"
+    }
+  },
+  "permissions": ["activeTab", "scripting", "storage"]
+}

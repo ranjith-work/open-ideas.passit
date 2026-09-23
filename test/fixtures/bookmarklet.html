@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Fixture: a page someone clicks the bookmarklet on</title>
+    <style>
+      body { margin: 0; font: 16px/1.6 system-ui, sans-serif; }
+      main { max-width: 640px; margin: 0 auto; padding: 20px; }
+      pre { display: none; }
+    </style>
+  </head>
+  <body>
+    <!--
+      Runs the two generated artefacts the way a browser runs them: the
+      extension's injected script (evaluated for its completion value, which is
+      how `chrome.scripting.executeScript({files})` returns data) and the
+      bookmarklet (decoded from its `javascript:` URL). These are the only
+      paths where capture, the codec and the QR encoder share a single scope
+      with their module syntax stripped out.
+    -->
+    <main>
+      <h1>Notes on the mechanical properties of bridge cable</h1>
+      <p id="lead">
+        Galvanised steel wire rope behaves differently in tension than the
+        handbooks suggest, particularly once the individual strands have had a
+        few decades to settle against one another under load.
+      </p>
+      <p>
+        The second paragraph exists mainly so the capture has more than one
+        candidate to choose between when it looks for the text at the top of
+        the viewport.
+      </p>
+    </main>
+
+    <pre id="report"></pre>
+
+    <script type="module">
+      const report = (detail) => {
+        document.getElementById('report').textContent = JSON.stringify(detail);
+      };
+
+      const fetchText = async (path) => (await fetch(path)).text();
+
+      try {
+        // ── The extension's injected script ─────────────────────────────
+        // Evaluated before the overlay exists, so it sees only page content.
+        const injectedSource = await fetchText('../../dist/extension/injected.js');
+        const injected = (0, eval)(injectedSource);
+
+        // ── The bookmarklet ─────────────────────────────────────────────
+        const { BOOKMARKLET } = await import('../../dist/web/bookmarklet.js');
+        const source = decodeURIComponent(BOOKMARKLET.replace(/^javascript:/, ''));
+        (0, eval)(source);
+
+        const poll = () => {
+          const host = document.getElementById('passit-overlay-host');
+          const root = host?.shadowRoot;
+          const svg = root?.querySelector('svg.qr');
+          if (!svg) return requestAnimationFrame(poll);
+
+          report({
+            injected,
+            sourceLength: source.length,
+            title: root.querySelector('.title').textContent,
+            host: root.querySelector('.host').textContent,
+            chips: [...root.querySelectorAll('.chip')].map((chip) => chip.textContent),
+            error: root.querySelector('.error')?.textContent ?? null,
+            qrPaths: svg.querySelectorAll('path').length,
+            qrViewBox: svg.getAttribute('viewBox'),
+            buttons: [...root.querySelectorAll('button')].map((b) => b.textContent),
+          });
+        };
+        poll();
+      } catch (error) {
+        report({ threw: String(error?.message ?? error), stack: String(error?.stack ?? '') });
+      }
+    </script>
+  </body>
+</html>

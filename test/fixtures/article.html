@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Fixture: a long article</title>
+    <style>
+      body { margin: 0; font: 16px/1.6 system-ui, sans-serif; }
+      header {
+        position: sticky; top: 0; padding: 14px 20px;
+        background: #222; color: #fff; font-weight: 600;
+      }
+      main { max-width: 640px; margin: 0 auto; padding: 20px; }
+      p { margin: 0 0 20px; }
+      pre { display: none; }
+    </style>
+  </head>
+  <body>
+    <!--
+      A stand-in for a real article. The prose is static rather than generated,
+      because a text fragment is matched against the document as it first
+      renders — content injected by a deferred script would arrive too late,
+      and the test would be measuring the fixture rather than PassIt.
+
+      Notable features: a sticky header that capture must ignore, and a
+      paragraph duplicated at index 5 and 48 so an ambiguous text fragment
+      would visibly scroll to the wrong copy.
+
+      ?s=<fraction>  scroll there before capturing (0 or absent = do not
+                     scroll, which is what the restore pass needs so the text
+                     fragment is the only thing that can move the page)
+      ?sel=<n>       select paragraph n before capturing
+    -->
+    <header>Sticky navigation that should never be captured</header>
+
+    <main id="article">
+      <p id="para-0">Paragraph 0. The quirks of section 0 of this document concern themselves with topic 0, a subject on which reasonable engineers have disagreed for 3 years without ever writing it down properly.</p>
+      <p id="para-1">Paragraph 1. The quirks of section 1 of this document concern themselves with topic 7, a subject on which reasonable engineers have disagreed for 4 years without ever writing it down properly.</p>
+      <p id="para-2">Paragraph 2. The quirks of section 2 of this document concern themselves with topic 1, a subject on which reasonable engineers have disagreed for 5 years without ever writing it down properly.</p>
+      <p id="para-3">Paragraph 3. The quirks of section 3 of this document concern themselves with topic 8, a subject on which reasonable engineers have disagreed for 6 years without ever writing it down properly.</p>
+      <p id="para-4">Paragraph 4. The quirks of section 4 of this document concern themselves with topic 2, a subject on which reasonable engineers have disagreed for 7 years without ever writing it down properly.</p>
+      <p id="para-5">This exact paragraph appears twice in the document, which is the situation a naive text fragment gets wrong by scrolling to the first copy instead of the one the reader was actually looking at.</p>
+      <p id="para-6">Paragraph 6. The quirks of section 6 of this document concern themselves with topic 3, a subject on which reasonable engineers have disagreed for 9 years without ever writing it down properly.</p>
+      <p id="para-7">Paragraph 7. The quirks of section 7 of this document concern themselves with topic 10, a subject on which reasonable engineers have disagreed for 10 years without ever writing it down properly.</p>
+      <p id="para-8">Paragraph 8. The quirks of section 8 of this document concern themselves with topic 4, a subject on which reasonable engineers have disagreed for 11 years without ever writing it down properly.</p>
+      <p id="para-9">Paragraph 9. The quirks of section 9 of this document concern themselves with topic 11, a subject on which reasonable engineers have disagreed for 12 years without ever writing it down properly.</p>
+      <p id="para-10">Paragraph 10. The quirks of section 10 of this document concern themselves with topic 5, a subject on which reasonable engineers have disagreed for 13 years without ever writing it down properly.</p>
+      <p id="para-11">Paragraph 11. The quirks of section 11 of this document concern themselves with topic 12, a subject on which reasonable engineers have disagreed for 14 years without ever writing it down properly.</p>
+      <p id="para-12">Paragraph 12. The quirks of section 12 of this document concern themselves with topic 6, a subject on which reasonable engineers have disagreed for 15 years without ever writing it down properly.</p>
+      <p id="para-13">Paragraph 13. The quirks of section 13 of this document concern themselves with topic 0, a subject on which reasonable engineers have disagreed for 16 years without ever writing it down properly.</p>
+      <p id="para-14">Paragraph 14. The quirks of section 14 of this document concern themselves with topic 7, a subject on which reasonable engineers have disagreed for 17 years without ever writing it down properly.</p>
+      <p id="para-15">Paragraph 15. The quirks of section 15 of this document concern themselves with topic 1, a subject on which reasonable engineers have disagreed for 18 years without ever writing it down properly.</p>
+      <p id="para-16">Paragraph 16. The quirks of section 16 of this document concern themselves with topic 8, a subject on which reasonable engineers have disagreed for 19 years without ever writing it down properly.</p>
+      <p id="para-17">Paragraph 17. The quirks of section 17 of this document concern themselves with topic 2, a subject on which reasonable engineers have disagreed for 20 years without ever writing it down properly.</p>
+      <p id="para-18">Paragraph 18. The quirks of section 18 of this document concern themselves with topic 9, a subject on which reasonable engineers have disagreed for 21 years without ever writing it down properly.</p>
+      <p id="para-19">Paragraph 19. The quirks of section 19 of this document concern themselves with topic 3, a subject on which reasonable engineers have disagreed for 22 years without ever writing it down properly.</p>
+      <p id="para-20">Paragraph 20. The quirks of section 20 of this document concern themselves with topic 10, a subject on which reasonable engineers have disagreed for 23 years without ever writing it down properly.</p>
+      <p id="para-21">Paragraph 21. The quirks of section 21 of this document concern themselves with topic 4, a subject on which reasonable engineers have disagreed for 24 years without ever writing it down properly.</p>
+      <p id="para-22">Paragraph 22. The quirks of section 22 of this document concern themselves with topic 11, a subject on which reasonable engineers have disagreed for 25 years without ever writing it down properly.</p>
+      <p id="para-23">Paragraph 23. The quirks of section 23 of this document concern themselves with topic 5, a subject on which reasonable engineers have disagreed for 26 years without ever writing it down properly.</p>
+      <p id="para-24">Paragraph 24. The quirks of section 24 of this document concern themselves with topic 12, a subject on which reasonable engineers have disagreed for 27 years without ever writing it down properly.</p>
+      <p id="para-25">Paragraph 25. The quirks of section 25 of this document concern themselves with topic 6, a subject on which reasonable engineers have disagreed for 28 years without ever writing it down properly.</p>
+      <p id="para-26">Paragraph 26. The quirks of section 26 of this document concern themselves with topic 0, a subject on which reasonable engineers have disagreed for 29 years without ever writing it down properly.</p>
+      <p id="para-27">Paragraph 27. The quirks of section 27 of this document concern themselves with topic 7, a subject on which reasonable engineers have disagreed for 30 years without ever writing it down properly.</p>
+      <p id="para-28">Paragraph 28. The quirks of section 28 of this document concern themselves with topic 1, a subject on which reasonable engineers have disagreed for 31 years without ever writing it down properly.</p>
+      <p id="para-29">Paragraph 29. The quirks of section 29 of this document concern themselves with topic 8, a subject on which reasonable engineers have disagreed for 32 years without ever writing it down properly.</p>
+      <p id="para-30">Paragraph 30. The quirks of section 30 of this document concern themselves with topic 2, a subject on which reasonable engineers have disagreed for 33 years without ever writing it down properly.</p>
+      <p id="para-31">Paragraph 31. The quirks of section 31 of this document concern themselves with topic 9, a subject on which reasonable engineers have disagreed for 34 years without ever writing it down properly.</p>
+      <p id="para-32">Paragraph 32. The quirks of section 32 of this document concern themselves with topic 3, a subject on which reasonable engineers have disagreed for 35 years without ever writing it down properly.</p>
+      <p id="para-33">Paragraph 33. The quirks of section 33 of this document concern themselves with topic 10, a subject on which reasonable engineers have disagreed for 36 years without ever writing it down properly.</p>
+      <p id="para-34">Paragraph 34. The quirks of section 34 of this document concern themselves with topic 4, a subject on which reasonable engineers have disagreed for 37 years without ever writing it down properly.</p>
+      <p id="para-35">Paragraph 35. The quirks of section 35 of this document concern themselves with topic 11, a subject on which reasonable engineers have disagreed for 38 years without ever writing it down properly.</p>
+      <p id="para-36">Paragraph 36. The quirks of section 36 of this document concern themselves with topic 5, a subject on which reasonable engineers have disagreed for 39 years without ever writing it down properly.</p>
+      <p id="para-37">Paragraph 37. The quirks of section 37 of this document concern themselves with topic 12, a subject on which reasonable engineers have disagreed for 40 years without ever writing it down properly.</p>
+      <p id="para-38">Paragraph 38. The quirks of section 38 of this document concern themselves with topic 6, a subject on which reasonable engineers have disagreed for 41 years without ever writing it down properly.</p>
+      <p id="para-39">Paragraph 39. The quirks of section 39 of this document concern themselves with topic 0, a subject on which reasonable engineers have disagreed for 42 years without ever writing it down properly.</p>
+      <p id="para-40">Paragraph 40. The quirks of section 40 of this document concern themselves with topic 7, a subject on which reasonable engineers have disagreed for 43 years without ever writing it down properly.</p>
+      <p id="para-41">Paragraph 41. The quirks of section 41 of this document concern themselves with topic 1, a subject on which reasonable engineers have disagreed for 44 years without ever writing it down properly.</p>
+      <p id="para-42">Paragraph 42. The quirks of section 42 of this document concern themselves with topic 8, a subject on which reasonable engineers have disagreed for 45 years without ever writing it down properly.</p>
+      <p id="para-43">Paragraph 43. The quirks of section 43 of this document concern themselves with topic 2, a subject on which reasonable engineers have disagreed for 46 years without ever writing it down properly.</p>
+      <p id="para-44">Paragraph 44. The quirks of section 44 of this document concern themselves with topic 9, a subject on which reasonable engineers have disagreed for 47 years without ever writing it down properly.</p>
+      <p id="para-45">Paragraph 45. The quirks of section 45 of this document concern themselves with topic 3, a subject on which reasonable engineers have disagreed for 48 years without ever writing it down properly.</p>
+      <p id="para-46">Paragraph 46. The quirks of section 46 of this document concern themselves with topic 10, a subject on which reasonable engineers have disagreed for 49 years without ever writing it down properly.</p>
+      <p id="para-47">Paragraph 47. The quirks of section 47 of this document concern themselves with topic 4, a subject on which reasonable engineers have disagreed for 50 years without ever writing it down properly.</p>
+      <p id="para-48">This exact paragraph appears twice in the document, which is the situation a naive text fragment gets wrong by scrolling to the first copy instead of the one the reader was actually looking at.</p>
+      <p id="para-49">Paragraph 49. The quirks of section 49 of this document concern themselves with topic 5, a subject on which reasonable engineers have disagreed for 52 years without ever writing it down properly.</p>
+      <p id="para-50">Paragraph 50. The quirks of section 50 of this document concern themselves with topic 12, a subject on which reasonable engineers have disagreed for 53 years without ever writing it down properly.</p>
+      <p id="para-51">Paragraph 51. The quirks of section 51 of this document concern themselves with topic 6, a subject on which reasonable engineers have disagreed for 54 years without ever writing it down properly.</p>
+      <p id="para-52">Paragraph 52. The quirks of section 52 of this document concern themselves with topic 0, a subject on which reasonable engineers have disagreed for 55 years without ever writing it down properly.</p>
+      <p id="para-53">Paragraph 53. The quirks of section 53 of this document concern themselves with topic 7, a subject on which reasonable engineers have disagreed for 56 years without ever writing it down properly.</p>
+      <p id="para-54">Paragraph 54. The quirks of section 54 of this document concern themselves with topic 1, a subject on which reasonable engineers have disagreed for 57 years without ever writing it down properly.</p>
+      <p id="para-55">Paragraph 55. The quirks of section 55 of this document concern themselves with topic 8, a subject on which reasonable engineers have disagreed for 58 years without ever writing it down properly.</p>
+      <p id="para-56">Paragraph 56. The quirks of section 56 of this document concern themselves with topic 2, a subject on which reasonable engineers have disagreed for 59 years without ever writing it down properly.</p>
+      <p id="para-57">Paragraph 57. The quirks of section 57 of this document concern themselves with topic 9, a subject on which reasonable engineers have disagreed for 60 years without ever writing it down properly.</p>
+      <p id="para-58">Paragraph 58. The quirks of section 58 of this document concern themselves with topic 3, a subject on which reasonable engineers have disagreed for 61 years without ever writing it down properly.</p>
+      <p id="para-59">Paragraph 59. The quirks of section 59 of this document concern themselves with topic 10, a subject on which reasonable engineers have disagreed for 62 years without ever writing it down properly.</p>
+      <p id="para-60">Paragraph 60. The quirks of section 60 of this document concern themselves with topic 4, a subject on which reasonable engineers have disagreed for 63 years without ever writing it down properly.</p>
+      <p id="para-61">Paragraph 61. The quirks of section 61 of this document concern themselves with topic 11, a subject on which reasonable engineers have disagreed for 64 years without ever writing it down properly.</p>
+      <p id="para-62">Paragraph 62. The quirks of section 62 of this document concern themselves with topic 5, a subject on which reasonable engineers have disagreed for 65 years without ever writing it down properly.</p>
+      <p id="para-63">Paragraph 63. The quirks of section 63 of this document concern themselves with topic 12, a subject on which reasonable engineers have disagreed for 66 years without ever writing it down properly.</p>
+      <p id="para-64">Paragraph 64. The quirks of section 64 of this document concern themselves with topic 6, a subject on which reasonable engineers have disagreed for 67 years without ever writing it down properly.</p>
+      <p id="para-65">Paragraph 65. The quirks of section 65 of this document concern themselves with topic 0, a subject on which reasonable engineers have disagreed for 68 years without ever writing it down properly.</p>
+      <p id="para-66">Paragraph 66. The quirks of section 66 of this document concern themselves with topic 7, a subject on which reasonable engineers have disagreed for 69 years without ever writing it down properly.</p>
+      <p id="para-67">Paragraph 67. The quirks of section 67 of this document concern themselves with topic 1, a subject on which reasonable engineers have disagreed for 70 years without ever writing it down properly.</p>
+      <p id="para-68">Paragraph 68. The quirks of section 68 of this document concern themselves with topic 8, a subject on which reasonable engineers have disagreed for 71 years without ever writing it down properly.</p>
+      <p id="para-69">Paragraph 69. The quirks of section 69 of this document concern themselves with topic 2, a subject on which reasonable engineers have disagreed for 72 years without ever writing it down properly.</p>
+    </main>
+
+    <pre id="report"></pre>
+    <pre id="scroll"></pre>
+
+    <script>
+      // Surface page errors to the test driver instead of failing silently.
+      const crash = (detail) => {
+        document.getElementById('report').textContent = JSON.stringify(detail);
+      };
+      addEventListener(
+        'error',
+        (event) =>
+          crash({
+            pageError: String(event.message || event.type),
+            resource: String(event.target?.src || ''),
+            stack: String(event.error?.stack || ''),
+          }),
+        true,
+      );
+      addEventListener('unhandledrejection', (event) =>
+        crash({
+          pageError: String(event.reason?.message ?? event.reason),
+          stack: String(event.reason?.stack || ''),
+        }),
+      );
+    </script>
+
+    <script type="module">
+      import { capturePageState, applyCaptureOptions } from '../../shared/capture.js';
+      import { encodePayload, decodePayload } from '../../shared/codec.js';
+      import { buildTargetUrl } from '../../shared/target.js';
+
+      const DUPLICATED = document.getElementById('para-48').textContent;
+      const params = new URLSearchParams(location.search);
+      const settle = () =>
+        new Promise((done) => requestAnimationFrame(() => requestAnimationFrame(done)));
+
+      const scrollTarget = Number(params.get('s') || 0);
+      if (scrollTarget > 0) {
+        const max = document.documentElement.scrollHeight - innerHeight;
+        window.scrollTo(0, Math.round(max * scrollTarget));
+      }
+
+      const selectParagraph = params.get('sel');
+      if (selectParagraph !== null) {
+        const range = document.createRange();
+        range.selectNodeContents(document.getElementById(`para-${selectParagraph}`));
+        getSelection().removeAllRanges();
+        getSelection().addRange(range);
+      }
+
+      await settle();
+
+      const state = capturePageState({ from: 'Fixture' });
+      const trimmed = applyCaptureOptions(state, { position: true, selection: true });
+      const payload = await encodePayload(trimmed);
+
+      document.getElementById('report').textContent = JSON.stringify({
+        state,
+        trimmed,
+        decoded: await decodePayload(payload),
+        payloadLength: payload.length,
+        target: buildTargetUrl(trimmed),
+        withoutSelection: applyCaptureOptions(state, { position: true, selection: false }),
+        withoutPosition: applyCaptureOptions(state, { position: false, selection: true }),
+        duplicated: DUPLICATED,
+      });
+
+      // Keep reporting where the page ended up: on the restore pass the only
+      // thing that should move it is the browser honouring the text fragment.
+      // `?expect=` names the paragraphs whose visibility is what actually
+      // matters — matching a scroll offset exactly is the wrong bar, because
+      // browsers centre matched text rather than putting it at the top.
+      const expected = (params.get('expect') || '').split(',').filter(Boolean);
+      const report = () => {
+        const max = document.documentElement.scrollHeight - innerHeight;
+        const visible = {};
+        for (const index of expected) {
+          const rect = document.getElementById(`para-${index}`).getBoundingClientRect();
+          visible[index] = {
+            top: Math.round(rect.top),
+            onScreen: rect.bottom > 0 && rect.top < innerHeight,
+          };
+        }
+        document.getElementById('scroll').textContent = JSON.stringify({
+          scrollY: Math.round(scrollY),
+          fraction: Math.round((scrollY / max) * 1000) / 1000,
+          hash: location.hash,
+          visible,
+        });
+        requestAnimationFrame(report);
+      };
+      report();
+    </script>
+  </body>
+</html>

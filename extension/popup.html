@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>PassIt</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <div id="root" class="loading">
+      <div class="qr-frame">
+        <canvas id="qr" width="252" height="252" aria-label="QR code for this handoff"></canvas>
+        <p id="placeholder" class="placeholder">Reading the page…</p>
+      </div>
+
+      <div class="meta">
+        <p id="title" class="title"></p>
+        <p id="host" class="host"></p>
+        <ul id="chips" class="chips" role="list"></ul>
+      </div>
+
+      <div id="controls" class="controls" hidden>
+        <label class="switch">
+          <input type="checkbox" id="opt-position" checked />
+          <span>My place on the page</span>
+        </label>
+        <label class="switch">
+          <input type="checkbox" id="opt-selection" checked />
+          <span id="opt-selection-label">Selected text</span>
+        </label>
+        <input id="note" type="text" maxlength="120" placeholder="Add a note (optional)" />
+      </div>
+
+      <p id="warning" class="warning" hidden></p>
+
+      <div class="actions">
+        <button id="copy" class="button" type="button">Copy link</button>
+        <button id="settings" class="button ghost" type="button" title="Settings">⚙</button>
+      </div>
+    </div>
+
+    <script type="module" src="popup.js"></script>
+  </body>
+</html>

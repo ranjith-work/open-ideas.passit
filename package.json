@@ -1,0 +1,17 @@
+{
+  "name": "passit",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "AirDrop for browser state — scan a QR and the tab moves to the device that scanned it.",
+  "scripts": {
+    "build": "node build.js",
+    "start": "node build.js && node serve.js",
+    "serve": "node serve.js",
+    "test": "node build.js && node --test --test-timeout=300000 'test/*.test.mjs'",
+    "test:unit": "node --test 'test/{codec,target,qr}.test.mjs'"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
