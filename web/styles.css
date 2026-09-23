@@ -442,6 +442,18 @@ h1 {
 .install-body p {
   margin: 0 0 8px;
 }
+.install-steps {
+  margin: 0 0 12px;
+  padding-left: 1.2em;
+  color: var(--ink-dim);
+}
+.install-steps li {
+  margin: 0 0 6px;
+}
+.install-body .download-ext {
+  display: inline-flex;
+  margin: 4px 0 10px;
+}
 .install-body code,
 kbd {
   font-family: var(--mono);

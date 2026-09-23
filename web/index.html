@@ -103,9 +103,28 @@
           <div class="install-body">
             <h3>Browser extension</h3>
             <p>
-              Load <code>dist/extension</code> as an unpacked extension
-              (<code>chrome://extensions</code> → Developer mode → Load
-              unpacked). Then press <kbd>⌥⇧P</kbd> on any tab.
+              Download the extension, unzip it, then load the folder in Chrome /
+              Edge / Brave / Arc (<code>chrome://extensions</code> → Developer
+              mode → Load unpacked). Press <kbd>⌥⇧P</kbd> on any tab.
+            </p>
+            <p>
+              <a class="button primary download-ext" href="./passit-extension.zip" download="passit-extension.zip">
+                Download extension
+              </a>
+            </p>
+            <ol class="install-steps">
+              <li>Unzip <code>passit-extension.zip</code>.</li>
+              <li>Open <code>chrome://extensions</code> and turn on Developer mode.</li>
+              <li>Load unpacked → pick the unzipped folder.</li>
+              <li>
+                Open Options and set the receiver to
+                <code class="receiver-url"></code>
+              </li>
+            </ol>
+            <p class="hint">
+              Browsers will not install a random zip as an extension. Load
+              unpacked is the supported path until PassIt is on the Chrome Web
+              Store.
             </p>
             <h3>Bookmarklet</h3>
             <p>

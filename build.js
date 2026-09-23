@@ -8,6 +8,7 @@
 import { cpSync, mkdirSync, readFileSync, rmSync, writeFileSync, statSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { execFileSync } from 'node:child_process';
 import { rgbaPng } from './tools/png.mjs';
 
 const ROOT = dirname(fileURLToPath(import.meta.url));
@@ -193,8 +194,39 @@ for (const size of [16, 32, 48, 128]) {
   writeFileSync(join(EXT, 'icons', `icon-${size}.png`), drawIcon(size));
 }
 
+writeFileSync(
+  join(EXT, 'INSTALL.txt'),
+  [
+    'PassIt — install the extension',
+    '',
+    '1. Unzip this archive. You should see a folder with manifest.json inside.',
+    '2. Open chrome://extensions (also works in Edge, Brave, Arc).',
+    '3. Turn on Developer mode (top right).',
+    '4. Click “Load unpacked” and choose the unzipped folder.',
+    '5. Open the extension’s Options and set the Receiver URL to the PassIt',
+    '   site you downloaded this from (for example https://….netlify.app/).',
+    '6. Press ⌥⇧P (Alt+Shift+P) on any tab to hand it off.',
+    '',
+    'Chrome will not install a random .zip as an extension for security reasons.',
+    '“Load unpacked” is the supported way until PassIt is on the Chrome Web Store.',
+    '',
+  ].join('\n'),
+);
+
+// Ship the extension from the same origin as the receiver page so visitors
+// never have to clone the repo. `zip` is on macOS and on Netlify’s build image.
+const EXT_ZIP = join(WEB, 'passit-extension.zip');
+try {
+  execFileSync('zip', ['-r', '-q', EXT_ZIP, '.'], { cwd: EXT, stdio: 'pipe' });
+} catch (error) {
+  throw new Error(
+    `Could not zip dist/extension (is the zip CLI installed?): ${error.message}`,
+  );
+}
+
 console.log('PassIt built');
 console.log(`  dist/web             receiver page`);
 console.log(`  dist/extension       load unpacked in chrome://extensions`);
+console.log(`  passit-extension.zip ${kb(EXT_ZIP)}  (download from the site)`);
 console.log(`  bookmarklet          ${(bookmarkletUrl.length / 1024).toFixed(1)} kB URL`);
 console.log(`  injected.js          ${kb(join(EXT, 'injected.js'))}`);

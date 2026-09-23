@@ -194,6 +194,11 @@ function renderHome() {
     bookmarklet.textContent = 'Drag me to the bookmarks bar ↑';
   });
 
+  const receiver = node.querySelector('.receiver-url');
+  if (receiver) {
+    receiver.textContent = `${location.origin}/`;
+  }
+
   node.querySelector('.scan').addEventListener('click', () => {
     location.hash = 'scan';
   });
